@@ -61,6 +61,8 @@ ctd:=0;
                     s:='';
                 end;
         end;
+        if ((s[length(s)] = 'd') and (s[1] = 'z')) then
+                        ctd:=ctd+1;
         if ctd = 0 then
             writeln('We have not letters, which starts by z and end by d');
         if ctd<>0 then
