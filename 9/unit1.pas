@@ -53,9 +53,8 @@ ctd:=0;
         begin
             read(f,c);
             if c<>' ' then
-                s:=s+c;
-            if c=' '
-                then
+                s:=s+c
+            else
                 begin
                     if ((s[length(s)] = 'd') and (s[1] = 'z')) then
                         ctd:=ctd+1;
