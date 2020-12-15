@@ -65,6 +65,7 @@ ctd:=0;
             write('We have not letters, which starts by z and end by d');
         if ctd<>0 then
             write('We have ',ctd,' letters');
-        close (f);
     end;
+   append(f);
+   write(f, ' ', ctd);
 end.
