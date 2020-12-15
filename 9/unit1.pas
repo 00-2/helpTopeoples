@@ -33,6 +33,7 @@ var
            read(f,c);
            write(c);
        end;
+       writeln;
        close (f);
    end;
 
@@ -62,10 +63,13 @@ ctd:=0;
                 end;
         end;
         if ctd = 0 then
-            write('We have not letters, which starts by z and end by d');
+            writeln('We have not letters, which starts by z and end by d');
         if ctd<>0 then
-            write('We have ',ctd,' letters');
+            writeln('We have ',ctd,' letters');
+        close (f);
+        assign(f,'file.txt');
+        append(f);
+        write(f, ctd);
+        close(f)
     end;
-   append(f);
-   write(f, ' ', ctd);
 end.
