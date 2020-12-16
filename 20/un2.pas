@@ -51,6 +51,13 @@ var
 i,n:integer;
 a:Student;
 begin
+ {$I-} reset(f);  {$I+}
+  if IOResult <> 0 then
+ begin
+  writeln('File not found')
+ end
+  else
+  begin
   reset(f);
   n:=filesize(f);
   writeln;
@@ -60,6 +67,7 @@ begin
     writeln(a.surname:20,a.Math:10, a.Inf:10);
   end;
   closefile(f);
+  end;
 end;
 
 procedure work(var f:tf);
@@ -68,6 +76,13 @@ i,n,j:integer;
 a:Student;
 m:arr;
 begin
+ {$I-} reset(f);  {$I+}
+  if IOResult <> 0 then
+ begin
+  writeln('File not found')
+ end
+  else
+  begin
   reset(f);
   n:=0;
   n:=filesize(f);
@@ -91,6 +106,8 @@ begin
   for i:=1 to n do
   write(f,m[i]);
   closefile(f);
+  end;
 end;
-end.
+end;
 
+end.
