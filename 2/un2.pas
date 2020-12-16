@@ -49,24 +49,39 @@ var
 i,n:integer;
 a:Guy;
 begin
-  reset(f);
-  n:=filesize(f);
-  writeln;
-  for i:=1 to n do
+ {$I-} reset(f);  {$I+}
+  if IOResult <> 0 then
+ begin
+  writeln('File not found')
+ end
+  else
   begin
-    read(f,a);
-    writeln(a.surname:20,a.mark:10);
-  end;
-  closefile(f);
-end;
+    reset(f);
+    n:=filesize(f);
+    writeln;
+    for i:=1 to n do
+    begin
+      read(f,a);
+      writeln(a.surname:20,a.mark:10);
+    end;
+    closefile(f);
+
+    end;
+ end;
 
 procedure work(var f:tf);
 var
-i,n,max,maxi,j:integer;
+i,n,j:integer;
 a:Guy;
 m:arr;
 begin
-  reset(f);
+  {$I-} reset(f);  {$I+}
+  if IOResult <> 0 then
+ begin
+  writeln('File not found')
+ end
+  else
+  begin
   n:=0;
   n:=filesize(f);
   for i:=1 to n do
@@ -86,5 +101,8 @@ begin
   write(f,m[i]);
   closefile(f);
 end;
+end;
+
+
 end.
 
