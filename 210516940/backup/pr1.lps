@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <Version Value="11"/>
+    <BuildModes Active="Default"/>
+    <Units Count="1">
+      <Unit0>
+        <Filename Value="pr1.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="34"/>
+        <CursorPos X="9" Y="82"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
+      </Unit0>
+    </Units>
+    <JumpHistory Count="8" HistoryIndex="7">
+      <Position1>
+        <Filename Value="pr1.lpr"/>
+        <Caret Line="14" Column="30"/>
+      </Position1>
+      <Position2>
+        <Filename Value="pr1.lpr"/>
+        <Caret Line="4" Column="10"/>
+      </Position2>
+      <Position3>
+        <Filename Value="pr1.lpr"/>
+        <Caret Line="14" Column="9"/>
+      </Position3>
+      <Position4>
+        <Filename Value="pr1.lpr"/>
+        <Caret Line="46" Column="21"/>
+      </Position4>
+      <Position5>
+        <Filename Value="pr1.lpr"/>
+        <Caret Line="26" Column="21"/>
+      </Position5>
+      <Position6>
+        <Filename Value="pr1.lpr"/>
+        <Caret Line="54" Column="32" TopLine="13"/>
+      </Position6>
+      <Position7>
+        <Filename Value="pr1.lpr"/>
+        <Caret Line="52" Column="19" TopLine="14"/>
+      </Position7>
+      <Position8>
+        <Filename Value="pr1.lpr"/>
+        <Caret Line="64" Column="19" TopLine="26"/>
+      </Position8>
+    </JumpHistory>
+    <RunParams>
+      <FormatVersion Value="2"/>
+      <Modes Count="0" ActiveMode=""/>
+    </RunParams>
+  </ProjectSession>
+</CONFIG>
