@@ -42,7 +42,7 @@ procedure input(var A: fileOfPharmacy; var m: byte);
 
       repeat
       //если вводить не числа - будет крашиться
-      Write('Дата изготовления - строка чисел (YYMMDD):');
+      Write('Срок годности- строка чисел (YYMMDD):');
       readln(date);
       YY:=date[1]+date[2];
       MM:=date[3]+date[4];
@@ -124,7 +124,7 @@ begin
 
       repeat
       //если вводить не числа - будет крашиться
-      Write('Дата изготовления - строка чисел (YYMMDD):');
+      Write('Срок годности- строка чисел (YYMMDD):');
       readln(date);
       YY:=date[1]+date[2];
       MM:=date[3]+date[4];
