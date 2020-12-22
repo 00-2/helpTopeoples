@@ -8,11 +8,14 @@ Classes, un2
 { you can add units after this };
 
 var
-  A, B, C: fileOfPharmacy;
+  A, B, F: fileOfPharmacy;
   m: byte;
   key:string;
 
 begin
+  Assign(A, 'Alpha.dat');
+  Assign(B, 'Beta.dat');
+  Assign(F, 'Omega.dat');
   repeat
   writeln('Что вы хотите сделать?');
   writeln('1 - создать файл записей с данными об лекарстве');
@@ -35,7 +38,7 @@ begin
       '6': delRecordFromEndOfFile(A, m);
       '7': sort(A);
       '8': searchByName(A,B);
-      '9': searchByApplication(A,C);
+      '9': searchByApplication(A,F);
      '10': exit;
     end;
     readln;
