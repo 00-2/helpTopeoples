@@ -279,13 +279,11 @@ procedure searchByName(var A: fileOfPharmacy; var F:fileOfPharmacy);
   var c:pharmacy;
   begin
   reset(A);
-  Assign(F, 'Beta.dat');
   rewrite(F);
     while not eof(A) do begin
       read(A, c);
-      if lowercase(c.name[0]) < 'e' then write(F, c);
+      if lowercase(c.name[1]) = 'e' then write(F, c);
     end;
-    close(F);
     writeln('Лекарства перенаправлены в новый файл');
     writeln('Содержимое:');
     Reset(F);
@@ -300,27 +298,25 @@ procedure searchByName(var A: fileOfPharmacy; var F:fileOfPharmacy);
   end;
 
 
-procedure searchByApplication(var A: fileOfPharmacy; var B:fileOfPharmacy);
+procedure searchByApplication(var A: fileOfPharmacy; var F:fileOfPharmacy);
   var c:pharmacy;
   begin
   reset(A);
-  Assign(B, 'Omega.dat');
-  rewrite(B);
+  rewrite(F);
     while not eof(A) do begin
       read(A, c);
-      if c.application='in' then write(B, c);
+      if c.application = 'in' then write(F, c);
     end;
-    close(B);
     writeln('Лекарства перенаправлены в новый файл');
     writeln('Содержимое:');
-    Reset(B);
+    Reset(F);
     writeln('Название':8,' ','Изгот.':6,' ','Годен до':8,' ','Способ использования');
-    while not EOF(B) do
+    while not EOF(F) do
     begin
-      Read(B, c);
+      Read(F, c);
       writeln(c.name: 8,' ',c.dateOB:6,' ',c.dateOD:8,' ', c.application: 3);
     end;
-    Close(B);
+    Close(F);
     Close(A);
   end;
 
@@ -330,6 +326,9 @@ var
   key:string;
 
 begin
+  Assign(A, 'Alpha.dat');
+  Assign(B, 'Beta.dat');
+  Assign(F, 'Omega.dat');
   repeat
   writeln('Что вы хотите сделать?');
   writeln('1 - создать файл записей с данными об лекарстве');
