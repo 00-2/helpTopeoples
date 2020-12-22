@@ -54,18 +54,20 @@ procedure input(var A: fileOfPharmacy; var m: byte);
       YY:=date[1]+date[2];
       MM:=date[3]+date[4];
       DD:=date[5]+date[6];
-      writeln(DD, MM,YY);
-      until (StrToInt(DD)<32) and (StrToInt(DD)>0) and (StrToInt(MM)<12) and  (StrToInt(MM)>0) and  (StrToInt(YY)>-1);
+      writeln('Вы ввели:',YY,MM,DD, ' если введенное вами дата существует, то вы перейдете на следующий этап');
+      until (StrToInt(DD)<32) and (StrToInt(DD)>0) and (StrToInt(MM)<13) and  (StrToInt(MM)>0) and  (StrToInt(YY)>-1);
       c.dateOB:=date;
 
       repeat
-      Write('Дата окончания срока годности - строка чисел (YYMMDD):');
+      //если вводить не числа - будет крашиться
+      Write('Срок годности- строка чисел (YYMMDD):');
       readln(date);
       YY:=date[1]+date[2];
       MM:=date[3]+date[4];
       DD:=date[5]+date[6];
-      until (StrToInt(DD)<32) and (StrToInt(DD)>0) and (StrToInt(MM)<12) and  (StrToInt(MM)>0) and  (StrToInt(YY)>-1);
-      c.dateOD:=date;
+      writeln('Вы ввели:',YY,MM,DD, ' если введенное вами дата существует, то вы перейдете на следующий этап');
+      until (StrToInt(DD)<32) and (StrToInt(DD)>0) and (StrToInt(MM)<13) and  (StrToInt(MM)>0) and  (StrToInt(YY)>-1);
+      c.dateOB:=date;
 
       repeat
       Write('Способ использования(in/out):');
@@ -133,17 +135,20 @@ begin
       YY:=date[1]+date[2];
       MM:=date[3]+date[4];
       DD:=date[5]+date[6];
-      until (StrToInt(DD)<32) and (StrToInt(DD)>0) and (StrToInt(MM)<12) and  (StrToInt(MM)>0) and  (StrToInt(YY)>-1);
+      writeln('Вы ввели:',YY,MM,DD, ' если введенное вами дата существует, то вы перейдете на следующий этап');
+      until (StrToInt(DD)<32) and (StrToInt(DD)>0) and (StrToInt(MM)<13) and  (StrToInt(MM)>0) and  (StrToInt(YY)>-1);
       c.dateOB:=date;
 
       repeat
-      Write('Дата окончания срока годности - строка чисел (YYMMDD):');
+      //если вводить не числа - будет крашиться
+      Write('Срок годности- строка чисел (YYMMDD):');
       readln(date);
       YY:=date[1]+date[2];
       MM:=date[3]+date[4];
       DD:=date[5]+date[6];
-      until (StrToInt(DD)<32) and (StrToInt(DD)>0) and (StrToInt(MM)<12) and  (StrToInt(MM)>0) and  (StrToInt(YY)>-1);
-      c.dateOD:=date;
+      writeln('Вы ввели:',YY,MM,DD, ' если введенное вами дата существует, то вы перейдете на следующий этап');
+      until (StrToInt(DD)<32) and (StrToInt(DD)>0) and (StrToInt(MM)<13) and  (StrToInt(MM)>0) and  (StrToInt(YY)>-1);
+      c.dateOB:=date;
 
       repeat
       Write('Способ использования(in/out):');
