@@ -275,27 +275,27 @@ procedure sort(var f: fileOfPharmacy);
  end;
 end;
 
-procedure searchByName(var A: fileOfPharmacy; var B:fileOfPharmacy);
+procedure searchByName(var A: fileOfPharmacy; var F:fileOfPharmacy);
   var c:pharmacy;
   begin
   reset(A);
-  Assign(B, 'Beta.dat');
-  rewrite(B);
+  Assign(F, 'Beta.dat');
+  rewrite(F);
     while not eof(A) do begin
       read(A, c);
-      if lowercase(c.name[0]) < 'e' then write(B, c);
+      if lowercase(c.name[0]) < 'e' then write(F, c);
     end;
-    close(B);
+    close(F);
     writeln('Лекарства перенаправлены в новый файл');
     writeln('Содержимое:');
-    Reset(B);
+    Reset(F);
     writeln('Название':8,' ','Изгот.':6,' ','Годен до':8,' ','Способ использования');
-    while not EOF(B) do
+    while not EOF(F) do
     begin
-      Read(B, c);
+      Read(F, c);
       writeln(c.name: 8,' ',c.dateOB:6,' ',c.dateOD:8,' ', c.application: 3);
     end;
-    Close(B);
+    Close(F);
     Close(A);
   end;
 
@@ -325,7 +325,7 @@ procedure searchByApplication(var A: fileOfPharmacy; var B:fileOfPharmacy);
   end;
 
 var
-  A, B, C: fileOfPharmacy;
+  A, B, F: fileOfPharmacy;
   m: byte;
   key:string;
 
@@ -352,7 +352,7 @@ begin
       '6': delRecordFromEndOfFile(A, m);
       '7': sort(A);
       '8': searchByName(A,B);
-      '9': searchByApplication(A,C);
+      '9': searchByApplication(A,F);
      '10': exit;
     end;
     readln;
