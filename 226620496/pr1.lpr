@@ -49,7 +49,7 @@ procedure input(var A: fileOfPharmacy; var m: byte);
       DD:=date[5]+date[6];
       writeln('Вы ввели:',YY,MM,DD, ' если введенное вами дата существует, то вы перейдете на следующий этап');
       until (StrToInt(DD)<32) and (StrToInt(DD)>0) and (StrToInt(MM)<13) and  (StrToInt(MM)>0) and  (StrToInt(YY)>-1);
-      c.dateOB:=date;
+      c.dateOD:=date;
 
       repeat
       Write('Способ использования(in/out):');
@@ -131,7 +131,7 @@ begin
       DD:=date[5]+date[6];
       writeln('Вы ввели:',YY,MM,DD, ' если введенное вами дата существует, то вы перейдете на следующий этап');
       until (StrToInt(DD)<32) and (StrToInt(DD)>0) and (StrToInt(MM)<13) and  (StrToInt(MM)>0) and  (StrToInt(YY)>-1);
-      c.dateOB:=date;
+      c.dateOD:=date;
 
       repeat
       Write('Способ использования(in/out):');
@@ -193,7 +193,7 @@ procedure searchMIN(var A: fileOfPharmacy);
   begin
     min := '999999';
     Reset(A);
-    writeln('лекарства, которые испортятся позже всего:');
+    writeln('лекарства, которые испортятся раньше всего:');
     writeln('Название':8,' ','Изгот.':6,' ','Годен до':8,' ','Способ использования');
      while not EOF(a) do
     begin
@@ -256,7 +256,7 @@ procedure sort(var f: fileOfPharmacy);
     while not eof(f) do
     begin
       read(f, x);
-      if x.name > max.name then
+      if x.name < max.name then
       begin
         idmax := filepos(f)-1;
         max := x;
