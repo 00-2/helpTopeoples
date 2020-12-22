@@ -27,8 +27,6 @@ procedure sort(var f: fileOfPharmacy);
 procedure searchByName(var A: fileOfPharmacy; var B:fileOfPharmacy);
 procedure searchByApplication(var A: fileOfPharmacy; var B:fileOfPharmacy);
 implementation
-
-
 procedure input(var A: fileOfPharmacy; var m: byte);
   var
     i: byte;
@@ -67,11 +65,12 @@ procedure input(var A: fileOfPharmacy; var m: byte);
       DD:=date[5]+date[6];
       writeln('Вы ввели:',YY,MM,DD, ' если введенное вами дата существует, то вы перейдете на следующий этап');
       until (StrToInt(DD)<32) and (StrToInt(DD)>0) and (StrToInt(MM)<13) and  (StrToInt(MM)>0) and  (StrToInt(YY)>-1);
-      c.dateOB:=date;
+      c.dateOD:=date;
 
       repeat
       Write('Способ использования(in/out):');
       readln(tmp);
+      writeln('Вы ввели:',tmp, ' если значение соответствует формату ввода,то вы перейдете на следующий этап');
       until((tmp='in') or(tmp='out'));
       c.application:=tmp;
 
@@ -148,11 +147,12 @@ begin
       DD:=date[5]+date[6];
       writeln('Вы ввели:',YY,MM,DD, ' если введенное вами дата существует, то вы перейдете на следующий этап');
       until (StrToInt(DD)<32) and (StrToInt(DD)>0) and (StrToInt(MM)<13) and  (StrToInt(MM)>0) and  (StrToInt(YY)>-1);
-      c.dateOB:=date;
+      c.dateOD:=date;
 
       repeat
       Write('Способ использования(in/out):');
       readln(tmp);
+      writeln('Вы ввели:',tmp, ' если значение соответствует формату ввода,то вы перейдете на следующий этап');
       until((tmp='in') or(tmp='out'));
       c.application:=tmp;
       Write(A, c);
@@ -209,7 +209,7 @@ procedure searchMIN(var A: fileOfPharmacy);
   begin
     min := '999999';
     Reset(A);
-    writeln('лекарства, которые испортятся позже всего:');
+    writeln('лекарства, которые испортятся раньше всего:');
     writeln('Название':8,' ','Изгот.':6,' ','Годен до':8,' ','Способ использования');
      while not EOF(a) do
     begin
@@ -272,7 +272,7 @@ procedure sort(var f: fileOfPharmacy);
     while not eof(f) do
     begin
       read(f, x);
-      if x.name > max.name then
+      if x.name < max.name then
       begin
         idmax := filepos(f)-1;
         max := x;
@@ -291,55 +291,50 @@ procedure sort(var f: fileOfPharmacy);
  end;
 end;
 
-procedure searchByName(var A: fileOfPharmacy; var B:fileOfPharmacy);
+procedure searchByName(var A: fileOfPharmacy; var F:fileOfPharmacy);
   var c:pharmacy;
   begin
   reset(A);
-  Assign(B, 'Beta.dat');
-  rewrite(B);
+  rewrite(F);
     while not eof(A) do begin
       read(A, c);
-      if lowercase(c.name[0]) < 'e' then write(B, c);
+      if lowercase(c.name[1]) = 'e' then write(F, c);
     end;
-    close(B);
     writeln('Лекарства перенаправлены в новый файл');
     writeln('Содержимое:');
-    Reset(B);
+    Reset(F);
     writeln('Название':8,' ','Изгот.':6,' ','Годен до':8,' ','Способ использования');
-    while not EOF(B) do
+    while not EOF(F) do
     begin
-      Read(B, c);
+      Read(F, c);
       writeln(c.name: 8,' ',c.dateOB:6,' ',c.dateOD:8,' ', c.application: 3);
     end;
-    Close(B);
+    Close(F);
     Close(A);
   end;
 
 
-procedure searchByApplication(var A: fileOfPharmacy; var B:fileOfPharmacy);
+procedure searchByApplication(var A: fileOfPharmacy; var F:fileOfPharmacy);
   var c:pharmacy;
   begin
   reset(A);
-  Assign(B, 'Omega.dat');
-  rewrite(B);
+  rewrite(F);
     while not eof(A) do begin
       read(A, c);
-      if c.application='in' then write(B, c);
+      if c.application = 'in' then write(F, c);
     end;
-    close(B);
     writeln('Лекарства перенаправлены в новый файл');
     writeln('Содержимое:');
-    Reset(B);
+    Reset(F);
     writeln('Название':8,' ','Изгот.':6,' ','Годен до':8,' ','Способ использования');
-    while not EOF(B) do
+    while not EOF(F) do
     begin
-      Read(B, c);
+      Read(F, c);
       writeln(c.name: 8,' ',c.dateOB:6,' ',c.dateOD:8,' ', c.application: 3);
     end;
-    Close(B);
+    Close(F);
     Close(A);
   end;
-
-
+  
 end.
 
