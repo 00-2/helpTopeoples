@@ -256,7 +256,7 @@ procedure sort(var f: fileOfPharmacy);
     while not eof(f) do
     begin
       read(f, x);
-      if x.name < max.name then
+      if x.name[0] < max.name[0] then
       begin
         idmax := filepos(f)-1;
         max := x;
