@@ -272,28 +272,18 @@ procedure searchByName(var A: fileOfBook; var F:fileOfBook);
     Close(A);
   end;
 
-
-procedure searchByYear(var A: fileOfBook; var F:fileOfBook);  //старше 1900
+procedure searchByYear(var A: fileOfBook; var F:TextFile);  //старше 1900
   var c:book;
   begin
   reset(A);
   rewrite(F);
     while not eof(A) do begin
       read(A, c);
-      if c.year > 1900 then write(F, c);
+      if c.year > 1900 then writeln(F,c.name: 8,' ',c.author:8,' ',c.year:8,' ', c.edition: 8);
     end;
     writeln('Книги перенаправлены в новый файл');
-    writeln('Содержимое:');
-    Reset(F);
-    writeln('Название':8,' ','Автор.':8,' ','Год выпуска':8,' ','Тираж':8);
-    while not EOF(F) do
-    begin
-      Read(F, c);
-      writeln(c.name: 8,' ',c.author:8,' ',c.year:8,' ', c.edition: 8);
-    end;
     Close(F);
     Close(A);
   end;
-
 end.
 
