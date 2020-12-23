@@ -1,4 +1,4 @@
-program dz3;
+program dz1;
 
 
 Uses sysutils,math;
