@@ -8,14 +8,15 @@ Classes, un2
 { you can add units after this };
 
 var
-  A, B, F: fileOfBook;
+  A, B: fileOfBook;
+  F:TextFile;
   m: byte;
   key:string;
 
 begin
   Assign(A, 'Alpha.dat');
   Assign(B, 'Beta.dat');
-  Assign(F, 'Omega.dat');
+  Assign(F, 'Omega.txt');
   repeat
   writeln('Что вы хотите сделать?');
   writeln('1 - создать файл записей с данными о книгах');
