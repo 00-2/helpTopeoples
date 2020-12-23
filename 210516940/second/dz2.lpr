@@ -1,11 +1,11 @@
-program pr1;
+program dz3;
 
 
-Uses sysutils;
+Uses sysutils,math;
 
 type
   cake = record
-    name: string[8];
+    name: string[20];
     calorie,cost: integer;
   end;
 
@@ -108,12 +108,12 @@ procedure output(var arr:arrOfCake;m:integer);
     var
         i:integer;
     begin
-        writeln('Название':8,' ','Калории.':8,' ','Цена':8);
+        writeln('Название':20,' ','Калории.':8,' ','Цена':8);
         for i := 1 to m do
-              writeln(arr[i].name: 8,' ',arr[i].calorie:8,' ',arr[i].cost:8);
+              writeln(arr[i].name: 20,' ',arr[i].calorie:8,' ',arr[i].cost:8);
     end;
-
-
+    
+    
   function isCorrect(var c:cake):boolean;
 //т.к. ввод у нас типизированный, то все записи корректны
     begin
@@ -124,9 +124,9 @@ procedure testing(var arr:arrOfCake;m:integer);
     var
         i:integer;
     begin
-        writeln('Название':8,' ','Результат проверки');
+        writeln('Название':20,' ','Результат проверки');
         for i := 1 to m do
-             writeln(arr[i].name:8, ' ' , isCorrect(arr[i]));
+             writeln(arr[i].name:20, ' ' , isCorrect(arr[i]));
     end;
 var
   m: integer;
