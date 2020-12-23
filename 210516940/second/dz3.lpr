@@ -144,7 +144,7 @@ function find(var arr:arrOfCake;m:integer):integer;
 procedure finding(var arr:arrOfCake;m:integer);
           var i:integer;
           begin
-          writeln('Булочка с max соотношением цены и калорийности');
+          writeln('Булочка с max соотношением калорийность/цена');
           writeln('Название':8,' ','Калории.':8,' ','Цена':8);
           i:=find(arr,m);
           writeln(arr[i].name: 8,' ',arr[i].calorie:8,' ',arr[i].cost:8);
