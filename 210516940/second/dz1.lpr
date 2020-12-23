@@ -1,11 +1,11 @@
-program pr1;
+program dz3;
 
 
-Uses sysutils;
+Uses sysutils,math;
 
 type
   cake = record
-    name: string[8];
+    name: string[20];
     calorie,cost: integer;
   end;
 
@@ -94,7 +94,7 @@ procedure sort4(var A: arrOfCake;m:integer);
                 A[j] := A[j+1];
                 A[j+1] := tmp;
             end;
-
+            
         for i := 1 to m do
         for j := 1 to m-i do
             if (A[j].name = A[j+1].name) and (A[j].cost>A[j+1].cost) then begin
@@ -108,12 +108,12 @@ procedure output(var arr:arrOfCake;m:integer);
     var
         i:integer;
     begin
-        writeln('Название':8,' ','Калории.':8,' ','Цена':8);
+        writeln('Название':20,' ','Калории.':8,' ','Цена':8);
         for i := 1 to m do
-              writeln(arr[i].name: 8,' ',arr[i].calorie:8,' ',arr[i].cost:8);
+              writeln(arr[i].name: 20,' ',arr[i].calorie:8,' ',arr[i].cost:8);
     end;
-
-
+    
+    
 
 var
   m: integer;
