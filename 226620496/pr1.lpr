@@ -298,30 +298,22 @@ procedure searchByName(var A: fileOfPharmacy; var F:fileOfPharmacy);
   end;
 
 
-procedure searchByApplication(var A: fileOfPharmacy; var F:fileOfPharmacy);
+procedure searchByApplication(var A: fileOfPharmacy; var F:textfile);
   var c:pharmacy;
   begin
   reset(A);
   rewrite(F);
     while not eof(A) do begin
       read(A, c);
-      if c.application = 'in' then write(F, c);
-    end;
-    writeln('Лекарства перенаправлены в новый файл');
-    writeln('Содержимое:');
-    Reset(F);
-    writeln('Название':8,' ','Изгот.':6,' ','Годен до':8,' ','Способ использования');
-    while not EOF(F) do
-    begin
-      Read(F, c);
-      writeln(c.name: 8,' ',c.dateOB:6,' ',c.dateOD:8,' ', c.application: 3);
+      if c.application = 'in' then write(F,c.name: 8,' ',c.dateOB:6,' ',c.dateOD:8,' ', c.application: 3);
     end;
     Close(F);
     Close(A);
   end;
 
 var
-  A, B, F: fileOfPharmacy;
+  A, B: fileOfPharmacy;
+  F:textfile;
   m: byte;
   key:string;
 
