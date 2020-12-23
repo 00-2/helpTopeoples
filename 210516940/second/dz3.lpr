@@ -40,60 +40,67 @@ procedure input(var A: arrOfCake;m:integer);
     writeln;
   end;
 
-procedure sort1(var arr: arrOfCake;m:integer);
+procedure sort1(var A: arrOfCake;m:integer);
     var
         i,j:integer;
         tmp:cake;
     begin
         for i := 1 to m do
         for j := 1 to m-i do
-            if arr[j].name > arr[j+1].name then begin
-                tmp := arr[j];
-                arr[j] := arr[j+1];
-                arr[j+1] := tmp;
+            if A[j].name > A[j+1].name then begin
+                tmp := A[j];
+                A[j] := A[j+1];
+                A[j+1] := tmp;
             end;
     end;
 
-procedure sort2(var arr: arrOfCake;m:integer);
+procedure sort2(var A: arrOfCake;m:integer);
     var
         i,j:integer;
         tmp:cake;
     begin
         for i := 1 to m do
         for j := 1 to m-i do
-            if arr[j].calorie > arr[j+1].calorie then begin
-                tmp := arr[j];
-                arr[j] := arr[j+1];
-                arr[j+1] := tmp;
+            if A[j].calorie > A[j+1].calorie then begin
+                tmp := A[j];
+                A[j] := A[j+1];
+                A[j+1] := tmp;
             end;
     end;
 
-procedure sort3(var arr: arrOfCake;m:integer);
+procedure sort3(var A: arrOfCake;m:integer);
     var
         i,j:integer;
         tmp:cake;
     begin
         for i := 1 to m do
         for j := 1 to m-i do
-            if arr[j].cost > arr[j+1].cost then begin
-                tmp := arr[j];
-                arr[j] := arr[j+1];
-                arr[j+1] := tmp;
+            if A[j].cost > A[j+1].cost then begin
+                tmp := A[j];
+                A[j] := A[j+1];
+                A[j+1] := tmp;
             end;
     end;
 
-procedure sort4(var arr: arrOfCake;m:integer);
+procedure sort4(var A: arrOfCake;m:integer);
     var
         i,j:integer;
         tmp:cake;
     begin
         for i := 1 to m do
         for j := 1 to m-i do
-            if arr[j].name = arr[j+1].name then
-                if arr[j].cost > arr[j+1].cost then begin
-                    tmp := arr[j];
-                    arr[j] := arr[j+1];
-                    arr[j+1] := tmp;
+            if A[j].name > A[j+1].name then begin
+                tmp := A[j];
+                A[j] := A[j+1];
+                A[j+1] := tmp;
+            end;
+            
+        for i := 1 to m do
+        for j := 1 to m-i do
+            if (A[j].name = A[j+1].name) and (A[j].cost>A[j+1].cost) then begin
+                tmp := A[j];
+                A[j] := A[j+1];
+                A[j+1] := tmp;
             end;
     end;
 
@@ -106,7 +113,8 @@ procedure output(var arr:arrOfCake;m:integer);
               writeln(arr[i].name: 8,' ',arr[i].calorie:8,' ',arr[i].cost:8);
     end;
 
-function isCorrect(var c:cake):boolean;
+
+  function isCorrect(var c:cake):boolean;
 //т.к. ввод у нас типизированный, то все записи корректны
     begin
     isCorrect:=True;
@@ -120,16 +128,15 @@ procedure testing(var arr:arrOfCake;m:integer);
         for i := 1 to m do
              writeln(arr[i].name:8, ' ' , isCorrect(arr[i]));
     end;
-
 function find(var arr:arrOfCake;m:integer):integer;
     var
         maxi, i:integer;
         kpd:real;
     begin
         for i := 1 to m do
-             if kpd <> max(kpd,arr[i].cost/arr[i].calorie) then
+             if kpd <> max(kpd,arr[i].calorie/arr[i].cost) then
                  begin
-                     kpd:=arr[i].cost/arr[i].calorie;
+                     kpd:=arr[i].calorie/arr[i].cost;
                      maxi:=i
                  end;
         find:=maxi;
@@ -177,5 +184,31 @@ begin
     end;
     readln;
   until key='8';
+{
+//этот код для проверки
+  SetLength(A,6);
+  i:=1;
+  c.name:='TEST2';c.calorie:=10;c.cost:=50;
+  A[i]:=c;
 
+  i:=2;
+  c.name:='TEST1';c.calorie:=1000;c.cost:=150;
+  A[i]:=c;
+  
+  
+  i:=3;
+  c.name:='TEST3';c.calorie:=80;c.cost:=60;
+  A[i]:=c;
+
+  i:=4;
+  c.name:='TEST4';c.calorie:=1000;c.cost:=350;
+  A[i]:=c;
+  
+  i:=5;
+  c.name:='TEST4';c.calorie:=1000;c.cost:=150;
+  A[i]:=c;
+  
+  output(A,i);
+  finding(A,i);
+  output(A,i);}
 end.
