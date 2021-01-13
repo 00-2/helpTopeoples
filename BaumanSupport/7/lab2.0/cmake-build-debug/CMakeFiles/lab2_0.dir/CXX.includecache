@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/alexsun8/MO/lab2.0/header.hpp
+cstddef
+-
+iomanip
+-
+vector
+-
+iostream
+-
+
+/home/alexsun8/MO/lab2.0/main.cpp
+header.hpp
+/home/alexsun8/MO/lab2.0/header.hpp
+table.cpp
+/home/alexsun8/MO/lab2.0/table.cpp
+
+/home/alexsun8/MO/lab2.0/table.cpp
+header.hpp
+/home/alexsun8/MO/lab2.0/header.hpp
+

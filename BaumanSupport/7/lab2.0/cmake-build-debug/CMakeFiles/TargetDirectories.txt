@@ -1,0 +1,3 @@
+/home/alexsun8/MO/lab2.0/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/alexsun8/MO/lab2.0/cmake-build-debug/CMakeFiles/lab2_0.dir
+/home/alexsun8/MO/lab2.0/cmake-build-debug/CMakeFiles/edit_cache.dir
