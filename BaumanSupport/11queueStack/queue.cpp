@@ -32,11 +32,22 @@ Q->first->next=NULL;
 Q->last=Q->first;
 Q->size=0;
 }
+
 bool isEmpty(Queue *Q) //проверка очереди на пустоту
 {
 if (Q->first==Q->last) return true;
 else return false;
 }
+
+void destructorQ(Queue *Q) //создание очереди
+{
+while(!isEmpty(Q)){
+    Q->first=Q->first->next; //смещение указателя
+    Q->size--;
+}
+cout <<"\nОчередь удалена\n";
+}
+
 
 int pop(Queue *Q) //вывод начального элемента
 {
@@ -77,6 +88,7 @@ cout<<"1. Добавить элемент"<<endl;
 cout<<"2. Вывод элементов"<<endl;
 cout<<"3. Достать верхний элемент"<<endl;
 cout<<"4. Узнать размер очереди"<<endl;
+cout<<"5. Удалить очередь"<<endl;
 cout<<"0. Выйти\n\n";
 cout<<"Номер команды > "; cin>>number;
 switch (number)
@@ -97,6 +109,11 @@ break;
 case '4':
 if (isEmpty(&Q)) cout<<endl<<"Очередь пуста\n\n";
 else cout<<"\nРазмер очереди: "<<Size(&Q)<<"\n\n";
+break;
+//-----------------------------------------------
+case '5':
+if (isEmpty(&Q)) cout<<endl<<"Очередь пуста\n\n";
+else destructorQ(&Q);
 break;
 //-----------------------------------------------
 case '0': break;
