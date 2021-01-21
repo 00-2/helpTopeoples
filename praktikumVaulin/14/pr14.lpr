@@ -17,19 +17,19 @@ var
   i,n:integer;
   a:Mag;
   begin
-    write('How many mags : ');
+    write('Сколько журналов вы хотите ввести : ');
     readln(n);
     rewrite(f);
     for i:=1 to n do
     begin
-      writeln('Insert Mag');
-      write('Name : ');
+      writeln('Введите данные:');
+      write('Имя : ');
       readln(a.name);
-      write('Year : ');
+      write('Год : ');
       readln(a.year);
-      write('Number : ');
+      write('Номер : ');
       readln(a.number);
-      write('Periodicity : ');
+      write('Периодичность : ');
       readln(a.periodicity);
       write(f,a);
     end;
@@ -44,7 +44,7 @@ begin
  {$I-} reset(f);  {$I+}
   if IOResult <> 0 then
  begin
-  writeln('File not found')
+  writeln('Файл не найден')
  end
   else
 begin
@@ -55,14 +55,14 @@ begin
   begin
     read(f,a);
     writeln;
-    writeln(i, ' Mag');
-    write('Name : ');
+    writeln(i, ' журнал');
+    write('Имя : ');
     writeln(a.name);
-    write('Year : ');
+    write('Год : ');
     writeln(a.year);
-    write('Number : ');
+    write('Номер : ');
     writeln(a.number);
-    write('Periodicity : ');
+    write('Периодичность : ');
     writeln(a.periodicity);
   end;
   closefile(f);
@@ -78,7 +78,7 @@ begin
  {$I-} reset(f);  {$I+}
   if IOResult <> 0 then
  begin
-  writeln('File not found')
+  writeln('Файл не найден');
  end
   else
 begin
@@ -92,15 +92,15 @@ begin
     begin
       a:=m[i];
       writeln;
-      writeln(i, ' Mag');
-      write('Name : ');
-      writeln(a.name);
-      write('Year : ');
-      writeln(a.year);
-      write('Number : ');
-      writeln(a.number);
-      write('Periodicity : ');
-      writeln(a.periodicity);
+    writeln(i, ' журнал');
+    write('Имя : ');
+    writeln(a.name);
+    write('Год : ');
+    writeln(a.year);
+    write('Номер : ');
+    writeln(a.number);
+    write('Периодичность : ');
+    writeln(a.periodicity);
     end;
 
 
@@ -123,29 +123,31 @@ begin
     begin
       a:=m[i];
       writeln;
-      writeln(i, ' Mag');
-      write('Name : ');
-      writeln(a.name);
-      write('Year : ');
-      writeln(a.year);
-      write('Number : ');
-      writeln(a.number);
-      write('Periodicity : ');
-      writeln(a.periodicity);
+    writeln(i, ' журнал');
+    write('Имя : ');
+    writeln(a.name);
+    write('Год : ');
+    writeln(a.year);
+    write('Номер : ');
+    writeln(a.number);
+    write('Периодичность : ');
+    writeln(a.periodicity);
     end;
 
 
    writeln;
-   writeln('Mag with lowest periodicity:');
+   writeln('Магазин с наименьшей периодичностью:');
    a:=m[1];
-   write('Name : ');
-   writeln(a.name);
-   write('Year : ');
-   writeln(a.year);
-   write('Number : ');
-   writeln(a.number);
-   write('Periodicity : ');
-   writeln(a.periodicity);
+   writeln;
+    writeln(i, ' журнал');
+    write('Имя : ');
+    writeln(a.name);
+    write('Год : ');
+    writeln(a.year);
+    write('Номер : ');
+    writeln(a.number);
+    write('Периодичность : ');
+    writeln(a.periodicity);
   closefile(f);
 end;
 end;
@@ -157,10 +159,10 @@ begin
 repeat
       assignfile(f,'file.txt');
       writeln('Menu:');
-      writeln('1.Input');
-      writeln('2.Output');
-      writeln('3.Work');
-      writeln('4.Exit');
+      writeln('1.VVOD');
+      writeln('2.VIVOD');
+      writeln('3.RABOTA');
+      writeln('4.VIHOD');
       write('Make your choice:');
       readln(c);
       case c of
@@ -169,7 +171,5 @@ repeat
       '3':work(f);
       end;
 until c='4';
-writeln('Good bye');
-end.
-
+writeln('Zaschita'te pozaluista ^_^');
 end.

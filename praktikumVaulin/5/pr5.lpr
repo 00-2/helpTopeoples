@@ -9,7 +9,7 @@ begin
   write('x:');read(x);writeln;
   while not (x<1) do
   begin
-       writeln('x must be less then 1, ln(1-x)');
+       writeln('x должен быть меньше 1, ln(1-x)');
        write('x:');read(x);writeln;
   end;
   write('eps:');readln(eps);
@@ -28,12 +28,12 @@ begin
   po:=abs(pa/s);//относ погрешность
 
   writeln();
-  writeln('accurate S=', accurate:k);
+  writeln('точность S=', accurate:k);
   writeln();
   writeln('S = ', s:k+3:k,' ':3, 'R=',R:k+3:k,' ':3, 'n=', n:4);
   writeln();
-  writeln('Absolute Error Rate = ', pa:6:2);
-  writeln('Relative Error Rate =', po:6:2);
+  writeln('Абсолютная погрешность = ', pa:6:2);
+  writeln('Относительная погрешность =', po:6:2);
   readln();
 end.
 //R0=-x

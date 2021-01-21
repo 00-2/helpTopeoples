@@ -1,4 +1,4 @@
-program p1;
+program pr1;
 uses SysUtils,Math;
 var X,Y,A:real;
 begin

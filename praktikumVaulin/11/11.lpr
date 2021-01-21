@@ -29,22 +29,19 @@ end;
       ctd,m,n,i,j:integer;
       sumOfP:real;
 begin
-  writeln('Size of matrix:');
+  writeln('Размер матрицы:');
   write('n=:');
   readln(n);
   write('m=:');
   readln(m);
   SetLength(matrixInit,n,m);
-  writeln('Insert matrix:');
+  writeln('Ввод матрицы:');
   for i:=0 to n-1 do
       for j:=0 to m-1 do
           read(matrixInit[i][j]);
       writeln;
 
-  {m:=3;n:=4;
-  SetLength(matrixInit,n,m);
-  matrixInit:= [[1,4,7],[10,13,16],[20,23,26],[5,5,5]];
-  }
+
 
 
   setLength(arrForTest,m);
@@ -81,8 +78,6 @@ begin
           begin
             arrForTest[j]:=matrixInit[i][j];
           end;
-
-
       sumOfP:=0;
       if checkArithmeticProgression(arrForTest,m) then
          begin
@@ -102,7 +97,7 @@ begin
         begin
           write(matrixResult[i][j]:5:2,' ');
         end;
-      writeln(' sum:',arrSumOfProgression[i]:5:2);
+      writeln(' сумма:',arrSumOfProgression[i]:5:2);
     end;
 
   readln();

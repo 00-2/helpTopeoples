@@ -13,10 +13,6 @@ for i:=0 to n-1 do
          write('слово ', i,':');
          readln(arrS[i]);
     end;
-{n:=5;
-Setlength(arrS,5);
-arrS:=['low','bigger','FASTER','Real','ksenia'];
-}
 writeln('Исходный массив');
 for i:=0 to n-1 do
     write(arrS[i], ' ');

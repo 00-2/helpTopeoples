@@ -34,26 +34,6 @@ begin
      read(l);
      write(' До ');
      readln(r);
-  {m:=4;
-  setlength(arrofmag,m);
-  setlength(arrResultB,m);
-  l:=10;r:=20;
-  i:=0;
-  arrOfMag[i].name:='a1';
-  arrOfMag[i].year:=5;
-  arrOfMag[i].periodicity:=2;
-  i:=i+1;
-  arrOfMag[i].name:='d1';
-  arrOfMag[i].year:=7;
-  arrOfMag[i].periodicity:=3;
-  i:=i+1;
-  arrOfMag[i].name:='b2';
-  arrOfMag[i].year:=3;
-  arrOfMag[i].periodicity:=5;
-  i:=i+1;
-  arrOfMag[i].name:='a2';
-  arrOfMag[i].year:=21;
-  arrOfMag[i].periodicity:=5;}
    //1 2 3 4
    //x o o o
   for i:=l to r do

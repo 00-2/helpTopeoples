@@ -40,23 +40,18 @@ var
   matrixInit:Matrix;
   i,j,minI,maxI,minN,minM,maxN,maxM,n,m:integer;
 begin
-    writeln('Size of matrix:');
+    writeln('Введите размер:');
   write('n=:');
   readln(n);
   write('m=:');
   readln(m);
   SetLength(matrixInit,n,m);
-  writeln('Insert matrix:');
+  writeln('Введите матрицу:');
   for i:=0 to n-1 do
       for j:=0 to m-1 do
           read(matrixInit[i][j]);
       writeln;
-  {m:=3;n:=4;
-  setLength(matrixInit,n,m);
-  //matrixInit:= [[1,4,60],[10,13,16],[20,23,26],[5,5,5]];
-  matrixInit:= [[1,4,7],[10,13,16],[20,23,26],[5,5,5]];
-  //matrixInit:= [[1,1,1],[1,1,1],[1,1,1],[1,1,1]];
-  }
+  
    for i:=0 to n-1 do
       begin
       for j:=0 to m-1 do
