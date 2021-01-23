@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 public abstract class SierpinskiTriangleAbstract extends JFrame implements KeyListener {
 
 	private static final long serialVersionUID = -3088085457878787186L;
-	protected int depth = 1;
+	protected int depth = 2;
 	protected Graphics2D g;
 	protected Color color;
 	protected boolean useRandomColor;
