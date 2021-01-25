@@ -1,6 +1,10 @@
 #include <stdio.h>
-
-const char *MSGS[] = {"0. Quit", "1. Blah-blah", "2. Blah-blah-blah"};
+#include "stdlib.h"
+#include "string.h"
+const char *MSGS[] = {"0. Quit", "1. Чтение данных для обработки из входного потока (с клавиатуры).",
+ "2. Чтение данных для обработки из текстового файла.", "3. Случайная генерация данных для обработки.",
+ "4. Сортировка данных (в соответствии с индивидуальным заданием).", "5. Обработка данных (в соответствии с индивидуальным заданием)",
+ "6. Запись текущего состояния обрабатываемых данных в текстовый файл", "7. замеры сортировок(пока что нет)"};
 const int MSGS_SIZE = sizeof(MSGS) / sizeof(MSGS[0]);
 
 int dialog(const char *msgs[], int n) {
@@ -11,7 +15,7 @@ int dialog(const char *msgs[], int n) {
 	error = "You're wrong. Try again!";
 	for (int i = 0; i < n; ++i) {
 	    puts(msgs[i]);
-	}
+    }
 	puts("Make your choice: ");
 	choice = getchar() - '0';
 	while (getchar() != '\n') {}
@@ -19,28 +23,34 @@ int dialog(const char *msgs[], int n) {
     return choice;
 }
 
-void readFromKeyboard(int ** matrix, int n, int m){
-    printf("\nn=:");scanf("%d",&n);
-    printf("\nm=:");scanf("%d",&m);
-    matrix = (int**) malloc(n * sizeof(int*));
-    for(int i = 0; i<n; i++){
-        matrix[i] = (int*) mallloc(m*(sizeof(int)));
+int ** readFromKeyboard(int *n, int *m){
+    printf("\nn=:");scanf("%d",n);
+    printf("\nm=:");scanf("%d",m);
+    int **matrix = (int**) malloc(*n * sizeof(int*));
+    for(int i = 0; i<*n; i++){
+        matrix[i] = (int*) malloc(*m*(sizeof(int)));
+    }
+    for(int i = 0; i<*n; ++i){
+        for(int j = 0; j<*m; ++j){
+            matrix[i][j]=i;
+        }
     }
 
-    for(int i = 0; i<n; ++i){
-        for(int j = 0; j<m; ++j){
-            scanf("%d", matrix[i][j]);
+    for(int i = 0; i<*n; ++i){
+        for(int j = 0; j<*m; ++j){
+            scanf("%d", &matrix[i][j]);
         }
         printf("\n");
     }
+    return matrix;
 }
 
-void readFromFile(int ** matrix, int n, int m){
-printf("\nn=:");scanf("%d",&n);
-printf("\nm=:");scanf("%d",&m);
-matrix = (int**) malloc(n * sizeof(int*));
-for(int i = 0; i<n; i++){
-        matrix[i] = (int*) mallloc(m*(sizeof(int)));
+int ** readFromFile(int *n, int *m){
+    printf("\nn=:");scanf("%d",n);
+    printf("\nm=:");scanf("%d",m);
+    int **matrix = (int**) malloc(*n * sizeof(int*));
+for(int i = 0; i<*n; i++){
+        matrix[i] = (int*) malloc(*m*(sizeof(int)));
     }
 
 FILE* fp;
@@ -51,46 +61,47 @@ if (fp == NULL)
     puts("Open file error");
     return;
 }
-for (int i = 0; i < n; i++)
+for (int i = 0; i < *n; i++)
 {
-    for (int j = 0; j < m; j++)
+    for (int j = 0; j < *m; j++)
     {
         fscanf(fp, "%d ", &matrix[i][j]);
     }
 }
 printf("\nМатрица\n");
-for (int i = 0; i < n; i++)
+for (int i = 0; i < *n; i++)
 {
-    for (int j = 0; j < m; j++)
+    for (int j = 0; j < *m; j++)
     {
         printf("%d\t", matrix[i][j]);
     }
     printf("\n");
 }
 fclose(fp);
+return matrix;
 }
 
-void readRandomData(int ** matrix, int n, int m){
-    printf("\nn=:");scanf("%d",&n);
-    printf("\nm=:");scanf("%d",&m);
-    matrix = (int**) malloc(n * sizeof(int*));
-    for(int i = 0; i<n; i++){
-        matrix[i] = (int*) mallloc(m*(sizeof(int)));
+int ** readRandomData(int *n, int *m){
+    printf("\nn=:");scanf("%d",n);
+    printf("\nm=:");scanf("%d",m);
+    int **matrix = (int**) malloc(*n * sizeof(int*));
+    for(int i = 0; i<*n; i++){
+        matrix[i] = (int*) malloc(*m*(sizeof(int)));
     }
 
-    for(int i = 0; i<n; ++i){
-        for(int j = 0; j<m; ++j){
+    for(int i = 0; i<*n; ++i){
+        for(int j = 0; j<*m; ++j){
             matrix[i][j] = rand()%100-50;
         }
     }
 
-    for (int i = 0; i < n; i++){
-        for (int j = 0; j < m; j++){
+    for (int i = 0; i <*n; i++){
+        for (int j = 0; j <* m; j++){
             printf("%d\t", matrix[i][j]);
         }
         printf("\n");
     }
-
+    return matrix;
 }
 
 void choicesSort(int* arrayPtr, int length_array) // сортировка выбором
@@ -120,29 +131,31 @@ void doChoisesSort(int** matrix, int n, int m){
     }
 }
 
-int ** remakeMatrix(int ** matrix, int n, int m){
+int ** remakeMatrix(int ** matrix, int *n, int *m){
     if (!matrix){
         printf("\nСначала введите матрицу\n");
-        return;
+        return NULL;
     }
-    int * sums = (int * ) malloc(m*sizeof(m));
+    int * sums = (int * ) malloc(*m*sizeof(m));
     int sum = 0;
-    for(int j = 0; j<m; ++j){
-        for(int i = 0; i<n; ++i){
+    for(int j = 0; j<*m; ++j){
+        for(int i = 0; i<*n; ++i){
             sum+=matrix[i][j];
         }
         sums[j] = sum;
         sum = 0;
     }
-    int **matrixTmp = (int**) malloc(n * sizeof(int*));
-    for(int i = 0; i < n; ++i)
+    //break
+    int **matrixTmp = (int**) malloc((*n+1) * sizeof(int*));
+    for(int i = 0; i < *n; ++i)
     {
-        matrixTmp[i] = (int*) mallloc(m*(sizeof(int)));
-        copy(matrix[i], matrix[i] + m, matrixTmp[i]);
-        free(matrix[i]);
+        matrixTmp[i] = (int*) malloc(*m*(sizeof(int)));
+        matrixTmp[i]=matrix[i];
+        //copy(matrix[i], matrix[i] + m, matrixTmp[i]);
+        //free(matrix[i]);
     }
-    matrixTmp[n++] = sums;
- 
+    matrixTmp[*n] = sums;
+    ++*n;
     return matrixTmp;
 }
 
@@ -173,28 +186,28 @@ int main() {
 
 do {
 	c = dialog(MSGS, MSGS_SIZE);
-	switch(c) {
+    //c = getchar()-'0';
+    switch(c) {
 	case 0:
 	    break;
 	case 1:
-	    readFromKeyboard(matrix,n,m);
+	    matrix = readFromKeyboard(&n,&m);
 	    break;
 	case 2:
-	    readFromFile(matrix,n,m);
+	    matrix = readFromFile(&n,&m);
 	    break;
     case 3:
-	    readRandomData(matrix,n,m);
+	    matrix = readRandomData(&n,&m);
 	    break;
     case 4:
 	    doChoisesSort(matrix,n,m);
 	    break;
     case 5:
-	    matrix = remakeMatrix(matrix,n,m);
+	    matrix = remakeMatrix(matrix,&n,&m);
 	    break;
     case 6:
         writeMatrixIntoFile(matrix, n,m);
         break;
 	}
 } while (c != 0);
-    return 0;
 }
