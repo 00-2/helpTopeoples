@@ -37,17 +37,17 @@ public class SierpinskiTriangle extends SierpinskiTriangleAbstract {
 	@Override
 	protected void handleInput(int keyCode) {
 		final int MIN_DEPTH=0, MAX_DEPTH = 7;
-		if((char)keyCode==',') {//в задаче стоит <<, но такого у меня нет на клавиатуре + использование констант, но совсем криво написано - сделал так
+		if((char)keyCode==KeyEvent.VK_UP) {//в задаче стоит <<, но такого у меня нет на клавиатуре + использование констант, но совсем криво написано - сделал так
 			this.depth+=1;
 		}
-		if((char)keyCode=='3') {//в задаче стоит #, но такого у меня нет на клавиатуре(shift+3 = #)
+		if((char)keyCode== KeyEvent.VK_DOWN) {//в задаче стоит #, но такого у меня нет на клавиатуре(shift+3 = #)
 			this.depth-=1;
 		}
 		
 		if (this.depth>MAX_DEPTH) {this.depth = MAX_DEPTH;}
 		if (this.depth<MIN_DEPTH) {this.depth = MIN_DEPTH;}
 		
-		if((char)keyCode==' ') {//в задаче стоит #, но такого у меня нет на клавиатуре(shift+3 = #)
+		if((char)keyCode==KeyEvent.VK_SPACE) {//в задаче стоит #, но такого у меня нет на клавиатуре(shift+3 = #)
 			toggleRandomColor();
 		}
 		paint(getGraphics());

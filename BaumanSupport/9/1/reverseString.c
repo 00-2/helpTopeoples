@@ -1,6 +1,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+typedef enum {false, true} bool; 
+
+
 typedef struct Item {
     char data;
     struct Item *next;
@@ -95,9 +98,31 @@ void list_remove(List *list, char data) {
     free(ptr);
 }
 
+bool list_contains(List *list, char data){
+    Item *ptr = list->head;
+    while (ptr && ptr->data != data) {
+        ptr = ptr->next;
+    }
+    if (ptr && ptr->data == data){
+        return 1;
+    }
+    return 0;
+}
+
+int list_length(List *list){
+    int ctd;
+    Item *ptr = list->head;
+    while (ptr) {
+        ctd++;
+        ptr = ptr->next;
+    }
+    return ctd;
+}
+
 void list_remove_duplicates(List *list, char data) {
     Item *ptr = list->head, *ptr_prev = NULL;
     
+    while(list_contains(list, data)){
     while (ptr && ptr->data != data) {
         ptr_prev = ptr;
         ptr = ptr->next;
@@ -115,23 +140,84 @@ void list_remove_duplicates(List *list, char data) {
         ptr_prev->next = ptr->next;
         ptr = ptr->next;
     }
-    
+    }
 }
+
+void list_replace_symbols(List *list, char source, char target) {
+    Item *ptr = list->head;
+    while (ptr) {
+        if (ptr->data == source){
+            ptr->data = target;
+        }
+        ptr = ptr->next;
+    }   
+}
+
+void list_reverse(List *list){
+    Item *ptr_tail = list->head, *ptr_head = list->head, *prev,*next,*curr, *ptrTmp;
+    bool flag = 0;
+    int ctd = 0;
+    char separator1 = ' ', separator2 = '\t';
+while(ptr_head->next)
+    {
+    //Find begin and end of word
+    while(ptr_tail->next&& (ptr_tail->next->data != separator1 && ptr_tail->next->data != separator2) ){
+        if(!flag){flag = 1; ptr_head = ptr_tail;}
+        ptr_tail = ptr_tail->next;
+        ctd++;
+    }
+    
+    //Reverse word
+    next = ptr_head->next;
+    prev = ptr_head;
+    ptr_head->next = ptr_tail->next;
+    for(;ctd>0;ctd--){
+        curr=next;
+        next = next->next;
+        curr->next = prev;
+        prev = curr;
+    }
+    ptr_tail = curr;
+    ptrTmp = list->head;
+    prev = ptrTmp;
+    while(ptr_head!=ptrTmp) {
+        prev = ptrTmp;
+        ptrTmp = ptrTmp->next;
+    }
+    if (prev == list->head){
+        list->head = ptr_tail;
+    }
+    else{
+        prev->next = ptr_tail;
+    }
+
+    if (ptr_head->next){
+        ptr_head = ptr_head->next->next;
+        ptr_tail = ptr_head;
+    }
+    else{
+        return;    
+    }
+    }
+}
+
 
 int main() {
     List *l = list_new();
     char c;
+    c=getchar();
     while (c!=EOF)
     {
         if (c=='\n'){
             //удаляем пробелы, разворачиваем строку
+            list_replace_symbols(l,'\t',' ');
             list_remove_duplicates(l,' ');
-            //list_remove_duplicates(l,'\t');
+            list_reverse(l);
             list_print(l);
             list_delete(l);
             l=list_new();
         }
-        else{
+        else{   
             list_push_back(l,c);
         }
         c=getchar();
