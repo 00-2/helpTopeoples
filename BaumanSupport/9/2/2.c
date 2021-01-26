@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include "stdlib.h"
 #include "string.h"
-const char *MSGS[] = {"0. Quit", "1. Чтение данных для обработки из входного потока (с клавиатуры).",
+#include <time.h>
+const char *MSGS[] = {"0. Завершить работу программы", "1. Чтение данных для обработки из входного потока (с клавиатуры).",
  "2. Чтение данных для обработки из текстового файла.", "3. Случайная генерация данных для обработки.",
  "4. Сортировка данных (в соответствии с индивидуальным заданием).", "5. Обработка данных (в соответствии с индивидуальным заданием)",
- "6. Запись текущего состояния обрабатываемых данных в текстовый файл", "7. замеры сортировок(пока что нет)"};
+ "6. Запись текущего состояния обрабатываемых данных в текстовый файл", "7. Замеры сортировок(тестируйте на 100*100(минимально)"};
 const int MSGS_SIZE = sizeof(MSGS) / sizeof(MSGS[0]);
 
 int dialog(const char *msgs[], int n) {
@@ -179,6 +180,58 @@ for (int i=0; i<n; ++i){
 fclose(fp);
 }
 
+void bubbleSort(int *a, size_t size) {
+    size_t i, j;
+    int tmp;
+    for (i = 1; i < size; i++) {
+        for (j = 1; j < size; j++) {
+            if (a[j] > a[j-1]) {
+                tmp = a[j];
+                a[j] = a[j-1];
+                a[j-1] = tmp;
+            }
+        }
+    }
+}
+
+void timeOfSorts(int ** matrix, int n, int m){
+   double avgTime;
+
+
+   int tmpMatrix[n][m];
+   for(int i = 0; i<n;i++){
+       for(int j = 0; j<m; j++){
+            tmpMatrix[i][j] = matrix[i][j];
+       }
+   }
+
+
+   // Сортировка выбором
+   int msec = 0, trigger = 10; /* 10ms */
+   clock_t before = clock();
+   for(int i = 0; i<n ; i++){
+       choicesSort(tmpMatrix[i], m);
+   }
+   clock_t difference = clock() - before;
+   msec = difference * 1000 / CLOCKS_PER_SEC;
+   printf("\nВремя работы сортировки выбором:%d msec\n", msec);
+   
+   // Сортировка пузырьком
+   for(int i = 0; i<n;i++){
+       for(int j = 0; j<m; j++){
+            tmpMatrix[i][j] = matrix[i][j];
+       }
+   }
+   before = clock();
+   for(int i = 0; i<n ; i++){
+       bubbleSort(tmpMatrix[i], m);
+   }
+   difference = clock() - before;
+   msec = difference * 1000 / CLOCKS_PER_SEC;
+   printf("\nВремя работы сортировки пузырьком:%d msec\n", msec);
+
+}
+
 int main() {
     int c = 0;
     int **matrix;
@@ -208,6 +261,9 @@ do {
     case 6:
         writeMatrixIntoFile(matrix, n,m);
         break;
-	}
+	case 7:
+        timeOfSorts(matrix, n, m);
+        break;
+    }
 } while (c != 0);
 }
