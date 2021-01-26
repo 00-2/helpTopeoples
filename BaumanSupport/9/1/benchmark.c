@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
-
+#include <math.h>
 typedef enum {false, true} bool; 
 
 
@@ -205,8 +205,18 @@ while(ptr_head->next)
 
 int main() {
     List *l = list_new();
-    char s[33] = "test benchmark        one    two";
-    int size = 33,ctd=-1;
+    printf("Размер строки:\n");
+    int size;scanf("%d", &size);
+    char s[size];
+    for(int i = 0; i<size; i++){
+        if (i%5==0 && i!=(size-1) && i!=0){
+            if (i%2){s[i] = ' ';}
+            else{s[i] = '\t';}
+            continue;
+        }
+        s[i] = rand()%65+57;
+    }
+    int ctd=-1;
     printf("СТРОКА ДЛЯ ТЕСТА:\n");
     for(int i = 0; i<size; i++){
         printf("%c", s[i]);
@@ -216,11 +226,15 @@ int main() {
         scanf("%d", &ctd);
         if(ctd<0){printf("\nОшибка.Сколько раз запустить программу?:");}
     }
-    long int btime,etime;
-    double avgTime;
+
+   double avgTime;
    // Считываем текущее время
-   btime = time (NULL);
-   printf("%ld", btime);
+   //btime = time (NULL);
+   int msec = 0, trigger = 10; /* 10ms */
+   clock_t before = clock();
+   
+   
+   //printf("%ld", btime);
    char c;
    for(int i = 0; i<ctd; ++i){  
         
@@ -236,9 +250,9 @@ int main() {
         l=list_new();
                
    }
-    etime = time(NULL);
-    double fullTime = difftime(etime, btime);
-    printf("%ld", etime);
-    avgTime = fullTime/ctd;
-    //printf("\nВремя работы программы:%lf\nКол-во выполненных раз:%d\nСреднее время, затраченное на одну операцию:%g\n", fullTime,ctd,avgTime);
+    clock_t difference = clock() - before;
+    msec = difference * 1000 / CLOCKS_PER_SEC;
+    if (msec!=0){
+        avgTime = pow(ctd/msec,-1);}
+    printf("\nВремя работы программы:%d msec\nКол-во выполненных раз:%d\nСреднее время, затраченное на одну операцию:%.8fmsec\n", msec,ctd,avgTime);
 }
