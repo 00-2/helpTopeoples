@@ -22,7 +22,7 @@ int dialog(const char *msgs[], int n) {
 	while (getchar() != '\n') {}
     } while (choice < 0 || choice >= n);
     return choice;
-}
+}//выдаёт  код символа -38, через раз выводит "You're wrong" 
 
 int ** readFromKeyboard(int *n, int *m){
     printf("\nn=:");scanf("%d",n);
@@ -30,20 +30,15 @@ int ** readFromKeyboard(int *n, int *m){
     int **matrix = (int**) malloc(*n * sizeof(int*));
     for(int i = 0; i<*n; i++){
         matrix[i] = (int*) malloc(*m*(sizeof(int)));
-    }
-    for(int i = 0; i<*n; ++i){
-        for(int j = 0; j<*m; ++j){
-            matrix[i][j]=i;
-        }
-    }
-
+    }//ввод n,m, присваивание значений их указателям, выделение памяти под динмаческий массив  
+	
     for(int i = 0; i<*n; ++i){
         for(int j = 0; j<*m; ++j){
             scanf("%d", &matrix[i][j]);
         }
         printf("\n");
-    }
-    return matrix;
+    }//ввод матрицы с клавиатуры
+    return matrix;//возвращает указатель
 }
 
 int ** readFromFile(int *n, int *m){
@@ -52,23 +47,23 @@ int ** readFromFile(int *n, int *m){
     int **matrix = (int**) malloc(*n * sizeof(int*));
 for(int i = 0; i<*n; i++){
         matrix[i] = (int*) malloc(*m*(sizeof(int)));
-    }
+    }//ввод n,m, присваивание значений их указателям, выделение памяти под динмаческий массив  
 
 FILE* fp;
-char * nameOfFile = "matrix.txt";
-fp = fopen(nameOfFile, "rt");
+char * nameOfFile = "matrix.txt";//задаем имя файла
+fp = fopen(nameOfFile, "rt");//открываем в режиме чтения текстового файла
 if (fp == NULL)
 {
     puts("Open file error");
     return;
-}
+}//если файл не открылся - вернулись в меню
 for (int i = 0; i < *n; i++)
 {
     for (int j = 0; j < *m; j++)
     {
         fscanf(fp, "%d ", &matrix[i][j]);
     }
-}
+}//прочитали матрицу, если в файле записано неправильно - не обработана ошибка
 printf("\nМатрица\n");
 for (int i = 0; i < *n; i++)
 {
@@ -88,25 +83,26 @@ int ** readRandomData(int *n, int *m){
     int **matrix = (int**) malloc(*n * sizeof(int*));
     for(int i = 0; i<*n; i++){
         matrix[i] = (int*) malloc(*m*(sizeof(int)));
-    }
+    }//Выделение памяти
 
     for(int i = 0; i<*n; ++i){
         for(int j = 0; j<*m; ++j){
             matrix[i][j] = rand()%100-50;
         }
-    }
+    }//заполнение рандомными данными
 
     for (int i = 0; i <*n; i++){
         for (int j = 0; j <* m; j++){
             printf("%d\t", matrix[i][j]);
         }
         printf("\n");
-    }
+    }//вывод матрицы
     return matrix;
 }
 
-void choicesSort(int* arrayPtr, int length_array) // сортировка выбором
+void choicesSort(int* arrayPtr, int length_array) // сортировка выбором(вроде бы возрастание)
 {
+    /*Поиск минимального значения элемента в массиве, и перемещения этого значения в начало массива.*/ 
     for (int repeat_counter = 0; repeat_counter < length_array; repeat_counter++)
     {
         int temp = arrayPtr[0]; // временная переменная для хранения значения перестановки
@@ -127,43 +123,46 @@ void doChoisesSort(int** matrix, int n, int m){
         printf("\nСначала введите матрицу\n");
         return;
     }
-    for(int i = 0; i<n; i++){
+    for(int i = 0; i<n; i++){//для каждой строки
         choicesSort(matrix[i], m);
     }
 }
 
 int ** remakeMatrix(int ** matrix, int *n, int *m){
-    if (!matrix){
+    //нахождение сумм
+    if (!matrix){//Если матрицы нет
         printf("\nСначала введите матрицу\n");
         return NULL;
     }
-    int * sums = (int * ) malloc(*m*sizeof(m));
+    int * sums = (int * ) malloc(*m*sizeof(m));//выделение памяти под массив сумм
     int sum = 0;
     for(int j = 0; j<*m; ++j){
         for(int i = 0; i<*n; ++i){
-            sum+=matrix[i][j];
+            sum+=matrix[i][j];//сложение элементов столбцов
+	    //Если не понимаешь - попробуй цикл на бумажке
         }
-        sums[j] = sum;
+        sums[j] = sum;//запись найденной суммы в массив сумм
         sum = 0;
     }
-    //break
-    int **matrixTmp = (int**) malloc((*n+1) * sizeof(int*));
+    //нахождение сумм	
+    int **matrixTmp = (int**) malloc((*n+1) * sizeof(int*));//выделение памяти (n+1)! тк должны добавить строку сумм 
     for(int i = 0; i < *n; ++i)
     {
         matrixTmp[i] = (int*) malloc(*m*(sizeof(int)));
         matrixTmp[i]=matrix[i];
         //copy(matrix[i], matrix[i] + m, matrixTmp[i]);
         //free(matrix[i]);
+	// я не стал создавать новую матрицу, просто присвоил i эл указатели на старую матрицу
     }
-    matrixTmp[*n] = sums;
-    ++*n;
-    return matrixTmp;
+    matrixTmp[*n] = sums;//последняя строка - массив сумм
+    ++*n;//увеличили значение n по указателю 
+    return matrixTmp; //вернули Измененную матрицу
 }
 
 void writeMatrixIntoFile(int ** matrix, int n, int m){
 FILE *fp;
 char * nameOfFile = "matrix.txt";
-fp = fopen(nameOfFile, "w");
+fp = fopen(nameOfFile, "w");//режим записи в текстовый файл
 if (fp == NULL)
 {
     puts("Open file error");
@@ -180,7 +179,10 @@ for (int i=0; i<n; ++i){
 fclose(fp);
 }
 
-void bubbleSort(int *a, size_t size) {
+void bubbleSort(int *a, size_t size) {//обычная пузырьковая сортировка массива
+    // При каждом проходе алгоритма по внутреннему циклу,
+    //очередной наибольший элемент массива ставится на своё место в конце массива рядом с предыдущим «наибольшим элементом»,
+    //а наименьший элемент перемещается на одну позицию к началу массива 
     size_t i, j;
     int tmp;
     for (i = 1; i < size; i++) {
@@ -203,12 +205,12 @@ void timeOfSorts(int ** matrix, int n, int m){
        for(int j = 0; j<m; j++){
             tmpMatrix[i][j] = matrix[i][j];
        }
-   }
+   }//создали матрицу tmp, чтобы измерять другую сортировку не на отсортированном массиве
 
 
    // Сортировка выбором
-   int msec = 0, trigger = 10; /* 10ms */
-   clock_t before = clock();
+   int msec = 0; /* 10ms */
+   clock_t before = clock();//начало работы программы
    for(int i = 0; i<n ; i++){
        choicesSort(tmpMatrix[i], m);
    }
@@ -238,8 +240,9 @@ int main() {
     int n, m;
 
 do {
-	c = dialog(MSGS, MSGS_SIZE);
+	c = dialog(MSGS, MSGS_SIZE);//иногда тупит ввод
     //c = getchar()-'0';
+    //ввод вверху работает идеально, но нет вывода меню
     switch(c) {
 	case 0:
 	    break;
@@ -259,11 +262,11 @@ do {
 	    matrix = remakeMatrix(matrix,&n,&m);
 	    break;
     case 6:
-        writeMatrixIntoFile(matrix, n,m);
-        break;
-	case 7:
-        timeOfSorts(matrix, n, m);
-        break;
+            writeMatrixIntoFile(matrix, n,m);
+            break;
+    case 7:
+            timeOfSorts(matrix, n, m);
+            break;
     }
 } while (c != 0);
 }
