@@ -179,5 +179,5 @@ repeat
       '3':work(f);
       end;
 until c='4';
-writeln('Zaschita"te pozaluista ^_^');
+writeln('Zaschita'te pozaluista ^_^');
 end.
