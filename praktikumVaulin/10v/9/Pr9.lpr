@@ -14,7 +14,7 @@ procedure inPut(var a:tmas);  //заполнение массива с клав�
 var  i:integer;
    begin
    for i:=1 to n do
-    readln(a[i]);
+    read(a[i]);
    end;
 
 procedure createMas(var a, aSort:tmas); //создание второго, дублирующего массива для сортировок
