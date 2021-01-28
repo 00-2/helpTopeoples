@@ -6,7 +6,7 @@ uses
 //уравнение x^4/8-xsin(14x)=0
 
 var
- X0, X1, Eps, dX, p: Extended;
+ X0, X1, Eps, dX, p: real;
  i, n:integer;
 begin
  //iteracii
