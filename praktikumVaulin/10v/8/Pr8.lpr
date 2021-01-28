@@ -12,7 +12,7 @@ var i, j, max, min, maxInd, minInd, proiz:integer;
 begin
   for i:=1 to k do
     for j:=1 to l do
-      a[i][j]:=random(21)-10;
+      read(a[i][j]);
  for i:=1 to k do
     begin
     proiz:=1;
