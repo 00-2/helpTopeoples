@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <Compiler Value="/usr/bin/fpc" Date="1574718682"/>
+  <Params Value=" -MObjFPC -Scghi -Cg -O1 -g -gl -l -vewnhibq -Fu/home/a/projects/CPPpr/helpTopeoples/praktikumVaulin/10v/5/ -FU/home/a/projects/CPPpr/helpTopeoples/praktikumVaulin/10v/5/lib/x86_64-linux/ -FE/home/a/projects/CPPpr/helpTopeoples/praktikumVaulin/10v/5/ -o/home/a/projects/CPPpr/helpTopeoples/praktikumVaulin/10v/5/Pr5 Pr5.lpr"/>
+</CONFIG>
