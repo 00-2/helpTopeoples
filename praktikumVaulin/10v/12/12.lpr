@@ -1,5 +1,5 @@
 program pr12;
-
+{вводишь строку, выделяет слова, преобразует их в палиндромы(шалаш)}
 function reverse(const str: string): string;
 var
   i, j: Integer;
