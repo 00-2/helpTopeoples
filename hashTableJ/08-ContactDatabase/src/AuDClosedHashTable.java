@@ -47,7 +47,7 @@ public class AuDClosedHashTable extends AuDHashTable {
 	}
 	
 	public boolean isFull() {
-		for (int i=0; i<this.table.length; ++i){
+		for (int i=0; i<this.capacity; ++i){
 			if (this.table[i]==null) return false;
 		}
 		return true;
@@ -63,37 +63,33 @@ public class AuDClosedHashTable extends AuDHashTable {
 	}
 	
 	private int getIndexOf(String email) throws NoSuchElementException{
-		int position = hash(email);
-		if (this.table[position].getEmail() == email) {
-			return position;
-		}
-		else {
-			position = -1;
-			for(int i = 0; i<this.capacity; ++i) {
-				position = hash(email, i);
-				if (this.table[position]!=null && this.table[position].getEmail() == email) {
-					return position;
+		int pos = -1;
+		for (int i = 0; i<this.capacity; ++i){
+			if (this.table[i]!=null) {
+				if (this.table[i].getEmail()==email) {
+					pos = i;
 				}
 			}
-			throw new NoSuchElementException();
 		}
+		if (pos == -1) throw new NoSuchElementException();
+		return pos;
 	}
 
 	
 	public static void main(String[] args) {
 
-	    AuDClosedHashTable hashtabelle = new AuDClosedHashTable(4);
+	    AuDClosedHashTable hashtabelle = new AuDClosedHashTable(5);
 	    Contact eins = new Contact("one@g.com");
 	    Contact zwei = new Contact("two@g.com");
-	    Contact drei = new Contact("three@g.com");
-	    Contact vier = new Contact("htree@g.com");
+	    Contact drei = new Contact("three@g.com");//eq hash
+	    Contact vier = new Contact("htree@g.com");//eq hash
 	    hashtabelle.insert(eins);
 	    hashtabelle.insert(zwei);
 	    hashtabelle.insert(drei);
 	    hashtabelle.insert(vier);
-	    System.out.println(hashtabelle.getIndexOf("one@g.com"));
-	    //hashtabelle.remove(zwei);
-	    System.out.println(hashtabelle.getIndexOf("two@g.com"));
-	    System.out.println(hashtabelle.getIndexOf("three@g.com"));
+	    System.out.println(hashtabelle.getContact("one@g.com").toString());
+	    hashtabelle.remove(vier);
+	    System.out.println(hashtabelle.getContact("two@g.com").toString());
+	    System.out.println(hashtabelle.getContact("three@g.com").toString());
 	}
 }
