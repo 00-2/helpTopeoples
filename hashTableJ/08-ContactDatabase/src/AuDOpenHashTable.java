@@ -61,7 +61,7 @@ public Contact getContact(String email)throws NoSuchElementException{
     }
 }
 
-public static void main(String[] args) {
+/*public static void main(String[] args) {
 
     AuDOpenHashTable hashtabelle = new AuDOpenHashTable(10);
     Contact eins = new Contact("one@g.com");
@@ -77,7 +77,7 @@ public static void main(String[] args) {
     
     //hashtabelle.insert(eins);
 //System.out.println(hashtabelle.getContact("one@g.com"));
-//	*/
-}
+//	
+}*/
 
 }

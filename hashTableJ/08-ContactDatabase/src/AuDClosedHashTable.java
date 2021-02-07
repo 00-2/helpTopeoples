@@ -76,7 +76,7 @@ public class AuDClosedHashTable extends AuDHashTable {
 	}
 
 	
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 
 	    AuDClosedHashTable hashtabelle = new AuDClosedHashTable(5);
 	    Contact eins = new Contact("one@g.com");
@@ -91,5 +91,5 @@ public class AuDClosedHashTable extends AuDHashTable {
 	    hashtabelle.remove(vier);
 	    System.out.println(hashtabelle.getContact("two@g.com").toString());
 	    System.out.println(hashtabelle.getContact("three@g.com").toString());
-	}
+	}*/
 }
