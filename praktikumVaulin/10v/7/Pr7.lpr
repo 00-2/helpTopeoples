@@ -10,8 +10,10 @@ var
  i, n:integer;
 begin
  //iteracii
-writeln('введите корень и приближение');
- ReadLn(X0,Eps);
+write('введите корень:  ');
+ ReadLn(X0);
+write('введите приближения:  ');
+ ReadLn(Eps);
  P:=Abs(exp(3*ln(x0))/2-(14*x0*cos(14*x0)+sin(14*x0)));  //вычисление модуля второй производной
  //для проверки применимости метода
  if P=0 then
