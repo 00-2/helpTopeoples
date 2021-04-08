@@ -73,7 +73,7 @@ implementation
      c:pharmacy;
      s:string;
    begin
-        c.nameOfDrug:=inputbox('title', 'ВВЕДИТЕ НАЗВАНИЕ ПРЕПАРАТА','');
+        c.nameOfDrug:=inputbox('title', 'ВВЕДИТЕ НАЗВАНИЕ ПРЕПАРАТА','').Replace('\n', '');
         c.nameOfSeller:=inputbox('title', 'ВВЕДИТЕ НАЗВАНИЕ ПРОДАВЦА','');
         c.dateOB:=inputbox('title', 'ВВЕДИТЕ ДАТУ СОЗДАНИЯ(ddmmyy):','');
         c.dateOD:=inputbox('title', 'ВВЕДИТЕ ДАТУ ПРОСРОЧКИ(ddmmyy):','');
@@ -96,7 +96,8 @@ implementation
              for j:=i to n-1 do begin
                arr[j]:=arr[j+1];
              end;
-        end;
+           n:=n-1;
+           end;
    end;
  procedure correctRecord(var arr:tmas; n:integer);
  var i:integer;
@@ -115,8 +116,8 @@ implementation
                    s:=inputbox('title', 'ВВОД ВНУТРИВЕННО(y/n)','');
              c.internal:=False;
              if s='y' then c.internal := True;
-                arr[i]:=c;
-                end;
+             arr[i]:=c;
+             end;
         end;
    end;
 
@@ -132,4 +133,3 @@ implementation
         halt;
    end;
 end.
-
