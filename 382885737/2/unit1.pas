@@ -26,6 +26,7 @@ type
     procedure MenuItem3Click(Sender: TObject);
     procedure MenuItem4Click(Sender: TObject);
     procedure MenuItem5Click(Sender: TObject);
+    procedure MenuItem6Click(Sender: TObject);
     procedure MenuItem7Click(Sender: TObject);
   private
 
@@ -66,7 +67,10 @@ end;
 procedure TForm1.MenuItem3Click(Sender: TObject);
 begin
     poisk(arr, n, c);
-    showmessage(c.nameOfDrug);
+    if c.nameOfDrug<>'' then
+        showmessage(c.nameOfDrug)
+    else
+        showmessage('Empty arr');
 end;
 
 procedure TForm1.MenuItem4Click(Sender: TObject);
@@ -82,8 +86,21 @@ end;
 procedure TForm1.MenuItem5Click(Sender: TObject);
 var i:integer;
 begin
+     delRecord(arr,n);
+     Combobox1.Clear;
+     for i:=1 to n do begin
+         Combobox1.Items.add(arr[i].nameOfDrug);//почему то косячит с первым вводом
+     end;
+end;
 
-
+procedure TForm1.MenuItem6Click(Sender: TObject);
+var i:integer;
+begin
+     correctRecord(arr,n);
+     Combobox1.Clear;
+     for i:=1 to n do begin
+         Combobox1.Items.add(arr[i].nameOfDrug);//почему то косячит с первым вводом
+     end;
 end;
 
 procedure TForm1.MenuItem7Click(Sender: TObject);
@@ -94,4 +111,3 @@ end;
 
 
 end.
-
