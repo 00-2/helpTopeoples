@@ -68,6 +68,30 @@ class TestListMethods(unittest.TestCase):
         tmpList.append(12)
         #self.assertRaises(IndexError,tmpList.get(2))
 
+    def test_deque_push(self):
+        tmpDeque = Deque()
+        tmpDeque.push(10)
+        tmpDeque.push(12)
+        self.assertTrue(tmpDeque.pointer.data==10 and tmpDeque.pointer.next.data == 12 and tmpDeque.size==2)
+    def test_deque_pop(self):
+        tmpDeque = Deque()
+        tmpDeque.push(10)
+        tmpDeque.push(12)
+        tmpDeque.push(13)
+        self.assertTrue(tmpDeque.pop()==10 and tmpDeque.pop()==12 and tmpDeque.size==1)
+
+    def test_stack_push(self):
+        tmpStack = Stack()
+        tmpStack.push(10)
+        tmpStack.push(12)
+        self.assertTrue(tmpStack.pointer.data==10 and tmpStack.pointer.next.data == 12 and tmpStack.size==2)
+    def test_stack_pop(self):
+        tmpStack = Stack()
+        tmpStack.push(10)
+        tmpStack.push(12)
+        tmpStack.push(13)
+        self.assertTrue(tmpStack.pop()==13 and tmpStack.pop()==12 and tmpStack.size==1)
+
 
 class Node:
 
@@ -141,5 +165,49 @@ class MyList:
             end = end.next
             position = position - 1
         return end.data
+
+class Deque:
+    def __init__(self):
+        self.pointer = None
+        self.size = 0
+    def pop(self):
+        tmp = self.pointer.data
+        self.pointer = self.pointer.next
+        self.size=self.size-1
+        return tmp
+    def push(self,new_data):
+        if self.pointer is None:
+            self.pointer = Node(new_data)
+            self.size=self.size+1
+            return
+        tmp=self.pointer
+        while tmp.next:
+            tmp = tmp.next
+        tmp.next = Node(new_data)
+        self.size = self.size + 1
+
+class Stack:
+    def __init__(self):
+        self.pointer = None
+        self.size = 0
+    def pop(self):
+        end=self.pointer
+        while end.next:
+            last = end
+            end = end.next
+        last.next = None
+        self.size = self.size-1
+        return end.data
+    def push(self,new_data):
+        new_element = Node(new_data)
+        self.size = self.size + 1
+        if self.pointer is None:
+            self.pointer = new_element
+            return
+        end = self.pointer
+        while end.next:
+            end = end.next
+        end.next = new_element
+
 if __name__ == "__main__":
     unittest.main()
