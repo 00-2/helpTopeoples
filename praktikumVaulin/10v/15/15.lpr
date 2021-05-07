@@ -1,165 +1,174 @@
-program pr15;
-{ objfpc}{+}
+program pr14;
+{$mode objfpc}{$H+}
 uses
   Classes, SysUtils;
 
-type
-  Mag=record
-    name: string[8];
-    year,number,periodicity : integer;
+type  Student = record
+    height,age,index:integer;
+    name,surname: string[8];
   end;
 
-arr=array [1..100] of Mag;
+arr=array [0..100] of Student;
 tf=text;
 
 procedure vvod(var f:tf);
 var
-  i,n:integer;
-  a:Mag;
-  begin
-    write('How many mags : ');
-    readln(n);
-    rewrite(f);
-    for i:=1 to n do
-    begin
-      writeln('Insert Mag');
-      write('Name : ');
-      readln(a.name);
-      write('Year : ');
-      readln(a.year);
-      write('Number : ');
-      readln(a.number);
-      write('Periodicity : ');
-      readln(a.periodicity);
-      writeln(f,a.name:8,a.year:4,a.number:4,a.periodicity:4);
-    end;
+  c:Student;
+  m, i:integer;
+begin
+     rewrite(f);
+     writeln('Сколько студентов будет в массиве?');
+     Write('  ');
+     readln(m);
+     writeln('  введите данные ', m, ' студентов');
+     for i := 0 to m-1 do
+     begin
+      writeln('Студент № ', i);
+      Write('Индекс группы: ');
+      readln(c.index);
+      Write('Введите имя: ');
+      readln(c.name);
+      Write('Введите фамилию: ');
+      readln(c.surname);
+      Write('Введите возраст: ');
+      readln(c.age);
+      Write('Введите рост: ');
+      readln(c.height);
+      writeln(f, c.index, ' ', c.name:7, ' ' , c.surname:7, ' ' , c.age, ' ', c.height);
+      end;
     closefile(f);
   end;
 
 procedure vivod(var f:tf);
 var
-i,n:integer;
-a:Mag;
+c:Student;
+n, i:integer;
 begin
- {-} reset(f);  {+}
+ {$I-} reset(f);  {$I+}
   if IOResult <> 0 then
  begin
-  writeln('File not found')
+  writeln('Файл не найден')
  end
   else
 begin
   reset(f);
   writeln;
   i:=0;
-  while(not eof(f)) do
-  begin
-    i:=i+1;
-    readln(f,a.name,a.year,a.number,a.periodicity);
-    writeln;
-    writeln(i, ' Mag');
-    write('Name : ');
-    writeln(a.name);
-    write('Year : ');
-    writeln(a.year);
-    write('Number : ');
-    writeln(a.number);
-    write('Periodicity : ');
-    writeln(a.periodicity);
-  end;
-  closefile(f);
+  while not EOF(f) do
+     begin
+      readln(f,c.index,c.name,c.surname,c.age,c.height);
+      writeln('Студент № ', i);
+      Write('Индекс группы: ');
+      writeln(c.index);
+      Write('Введите имя: ');
+      writeln(c.name);
+      Write('Введите фамилию: ');
+      writeln(c.surname);
+      Write('Введите возраст: ');
+      writeln(c.age);
+      Write('Введите рост: ');
+      writeln(c.height);
+      i:=i+1;
+     end;
+    closefile(f);
 end;
 end;
 
 procedure work(var f:tf);
 var
-i,n,max,maxi,j:integer;
-a:Mag;
-m:arr;
+ c:Student;
+  arrOfMag,arrResult:array[0..200] of Student;
+  m, j, i, average, sum,sizeOfArrayRes:integer;
 begin
- {-} reset(f);  {+}
+ {$I-} reset(f);  {$I+}
   if IOResult <> 0 then
  begin
-  writeln('File not found')
+  writeln('Файл не найден');
  end
   else
 begin
-  n:=0;
   i:=0;
-  while(not eof(f)) do
-  begin
+  while not EOF(f) do
+     begin
+      readln(f,c.index,c.name,c.surname,c.age,c.height);
+      arrOfMag[i]:=c;
       i:=i+1;
-      readln(f,a.name,a.year,a.number,a.periodicity);
-      m[i]:=a;
-      writeln;
-      writeln(i, ' Mag');
-      write('Name : ');
-      writeln(a.name);
-      write('Year : ');
-      writeln(a.year);
-      write('Number : ');
-      writeln(a.number);
-      write('Periodicity : ');
-      writeln(a.periodicity);
-    end;
-    n:=i;
-
-
-  for i:=1 to n-1 do
-  for j:=1 to n-i do
-  if m[j].periodicity>m[j+1].periodicity then
-  begin
-    a:=m[j];
-    m[j]:=m[j+1];
-    m[j+1]:=a;
-  end;
-
-
-  rewrite(f);
-  for i:=1 to n do
-    writeln(f,a.name:8,a.year:4,a.number:4,a.periodicity:4);
-
-  for i:=1 to n do
-    begin
-      a:=m[i];
-      writeln;
-      writeln(i, ' Mag');
-      write('Name : ');
-      writeln(a.name);
-      write('Year : ');
-      writeln(a.year);
-      write('Number : ');
-      writeln(a.number);
-      write('Periodicity : ');
-      writeln(a.periodicity);
-    end;
-
-
-   writeln;
-   writeln('Mag with lowest periodicity:');
-   a:=m[1];
-   write('Name : ');
-   writeln(a.name);
-   write('Year : ');
-   writeln(a.year);
-   write('Number : ');
-   writeln(a.number);
-   write('Periodicity : ');
-   writeln(a.periodicity);
+     end;
+  m:=i;  
   closefile(f);
+      for i := 0 to m-1 do
+     begin
+      c:=arrOfMag[i];
+      writeln('Студент № ', i);
+      Write('Индекс группы: ');
+      Writeln(c.index);
+      Write('Введите имя: ');
+      Writeln(c.name);
+      Write('Введите фамилию: ');
+      Writeln(c.surname);
+      Write('Введите возраст: ');
+      Writeln(c.age);
+      Write('Введите рост: ');
+      Writeln(c.height);
+      end;
+
+
+   sum:=0;
+  for i:=0 to m-1 do
+  begin
+       sum:=sum+arrOfMag[i].height;
+  end;
+  average:=sum div m;
+  
+  j:=0;
+  for i:=0 to m-1 do
+      if (arrOfMag[i].height>=average) then
+            begin
+                 arrResult[j]:=arrOfMag[i];
+                 j:=j+1;
+            end;
+  sizeOfArrayRes:=j;
+  writeln('Исходный массив:');
+  for i:=0 to sizeOfArrayRes-1 do
+      write(arrResult[i].name, ' ');
+  writeln;
+
+  for i:=0 to sizeOfArrayRes-1 do
+      for j:=0 to sizeOfArrayRes-2 do
+          if arrResult[j].name>arrResult[j+1].name then
+                begin
+                     c:=arrResult[j];
+                     arrResult[j]:=arrResult[j+1];
+                     arrResult[j+1]:=c;
+                end;
+
+
+  writeln('Отсортированный массив:');
+  for i:=0 to sizeOfArrayRes-1 do
+      write(arrResult[i].name, ' ');
+  writeln;
+
+  writeln('Студент с наибольшим ростом');
+  c:=arrResult[0];
+  for i:=0 to sizeOfArrayRes-1 do
+      if c.height<arrResult[i].height then
+            c:=arrResult[i];
+  writeln(c.name, ' ' , c.surname, ' ', c.height);
+
 end;
 end;
 
 var
-f:text;
+f:tf;
 c:char;
 begin
 repeat
       assignfile(f,'file.txt');
       writeln('Menu:');
-      writeln('1.Input');
-      writeln('2.Output');
-      writeln('3.Work');
-      writeln('4.Exit');
+      writeln('1.VVOD');
+      writeln('2.VIVOD');
+      writeln('3.RABOTA');
+      writeln('4.VIHOD');
       write('Make your choice:');
       readln(c);
       case c of
@@ -168,7 +177,5 @@ repeat
       '3':work(f);
       end;
 until c='4';
-writeln('Good bye');
-end.
-
+writeln('До свидания!');
 end.
