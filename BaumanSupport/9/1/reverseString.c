@@ -154,17 +154,66 @@ void list_replace_symbols(List *list, char source, char target) {//замена 
     }   
 }
 
-void list_reverse(List *list){
-    Item *phead = list->head;
-    Item *prhead = NULL; // Здесь в итоге окажется указатель на голову перевёрнутого списка.
-
-    while (phead != NULL)
+void list_reverse(List *list){//разворот списка - самая сложная функци
+    Item *ptr_tail = list->head, *ptr_head = list->head, *prev,*next,*curr, *ptrTmp;
+    bool flag = 0;
+    int ctd = 0;
+    char separator1 = ' ', separator2 = '\t';
+while(ptr_head->next)
     {
-        Item *p = phead->next;
-        phead->next = prhead;
-        prhead = phead;
-        phead = p;
+    //Find begin and end of word
+    while(ptr_tail->next&& (ptr_tail->next->data != separator1 && ptr_tail->next->data != separator2) ){
+        if(!flag){flag = 1; ptr_head = ptr_tail;}
+        ptr_tail = ptr_tail->next;
+        ctd++;
+    }//находит слова - ptr_head - cсылка на начало, ptr_tail - ссылка на конец
+    
+    //Reverse word
+    //надо делать на бумажке, чтобы понять. 
+    /*ABCD E
+      0)next=B 
+      ptr_head->' '
+      prev = A
+      1) curr = B
+         B->A
+         next = C
+      2) curr = C
+         C->B->A
+         next = D
+      3) curr = D
+         D->C->B->A->' '
+    */
+    next = ptr_head->next;//сохранили следующий после начального
+    prev = ptr_head;
+    ptr_head->next = ptr_tail->next;//начальный элемент 
+    for(;ctd>0;ctd--){
+        curr=next;
+        next = next->next;
+        curr->next = prev;
+        prev = curr;
     }
-    list->head = prhead;
+    
+    ptr_tail = curr;
+    ptrTmp = list->head;
+    prev = ptrTmp;
+    while(ptr_head!=ptrTmp) {
+        prev = ptrTmp;
+        ptrTmp = ptrTmp->next;
+    }//нашли указатель, который указывал на ptr_head,теперь он указывает на ptr_tail
+    if (prev == list->head){
+        list->head = ptr_tail;
+    }
+    else{
+        prev->next = ptr_tail;
+    }
+
+    if (ptr_head->next){
+        ptr_head = ptr_head->next->next;
+        ptr_tail = ptr_head;
+    }
+    else{
+        return;    
+    }
+    }
 }
 
